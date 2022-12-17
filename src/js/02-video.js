@@ -4,9 +4,14 @@ import Player from '@vimeo/player';
 const iframe = document.querySelector('#vimeo-player');
 const player = new Player(iframe);
 
-player.on('timeupdate', throttle(onPlay, 1000));
+localStorage.getItem('videoplayer-current-time')
+  ? player.setCurrentTime(localStorage.getItem('videoplayer-current-time'))
+  : 0;
+player.on(
+  'timeupdate',
+  throttle(function (evt) {
+    localStorage.setItem('videoplayer-current-time', evt.seconds);
 
-function onPlay({ seconds }) {
-  localStorage.setItem('videoplayer-current-time', seconds);
-}
-player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
+    player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
+  }, 1000)
+);
