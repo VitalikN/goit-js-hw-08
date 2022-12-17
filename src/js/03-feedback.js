@@ -4,7 +4,6 @@ const form = document.querySelector('.feedback-form');
 
 form.addEventListener('input', throttle(onFormInput, 500));
 form.addEventListener('submit', onFormSubmit);
-onInitform();
 
 const formFilters = {};
 
@@ -13,6 +12,7 @@ function onFormInput(evt) {
   localStorage.setItem('feedback-form-state', JSON.stringify(formFilters));
 }
 function onFormSubmit(evt) {
+  onInitform();
   console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
   evt.preventDefault();
   evt.currentTarget.reset();
