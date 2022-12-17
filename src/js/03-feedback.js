@@ -21,14 +21,12 @@ function onFormSubmit(evt) {
 
 function onInitform() {
   const feedbackForm = JSON.parse(localStorage.getItem('feedback-form-state'));
-  const email = document.querySelector('.feedback-form input');
-  const message = document.querySelector('.feedback-form  textarea');
+  let email = document.querySelector('.feedback-form input');
+  let message = document.querySelector('.feedback-form  textarea');
+  if (!localStorage.getItem('feedback-form-state')) {
+    (email = ''), (message = '');
+  }
   if (feedbackForm) {
-    // feedbackForm = JSON.parse(feedbackForm);
-    // Object.entries(feedbackForm).forEach(([name, value]) => {
-    //   form.elements[name] = value;
-    // });
-
     email.value = feedbackForm.email;
     message.value = feedbackForm.message;
   }
