@@ -31,6 +31,7 @@ function onFormInput(evt) {
 function onFormSubmit(evt) {
   evt.preventDefault();
   if (!feedbackFormInitial.email || !feedbackFormInitial.message) {
+    return;
   } else {
     console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
   }
