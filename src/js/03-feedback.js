@@ -19,6 +19,8 @@ if (!localStorage.getItem('feedback-form-state')) {
     JSON.stringify(feedbackFormInitial)
   );
 }
+email.required = 'true';
+message.required = 'true';
 
 function onFormInput(evt) {
   feedbackFormInitial[evt.target.name] = evt.target.value;
