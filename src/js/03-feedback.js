@@ -32,25 +32,13 @@ function onFormInput() {
   );
 }
 
-function onInitform() {
-  const feedbackForm = JSON.parse(localStorage.getItem('feedback-form-state'));
-
-  if (feedbackForm) {
-    email.value = feedbackForm.email;
-    message.value = feedbackForm.message;
-  }
-}
-
 function onFormSubmit(evt) {
   evt.preventDefault();
-  if (!feedbackFormInitial.email || !feedbackFormInitial.message) {
-    return;
-  } else {
-    console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
-  }
 
-  // feedbackFormInitial.email = '';
-  // feedbackFormInitial.message = '';
+  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+
+  feedbackFormInitial.email = '';
+  feedbackFormInitial.message = '';
   localStorage.setItem(
     'feedback-form-state',
     JSON.stringify(feedbackFormInitial)
@@ -58,4 +46,13 @@ function onFormSubmit(evt) {
 
   evt.currentTarget.reset();
   localStorage.removeItem('feedback-form-state');
+}
+
+function onInitform() {
+  const feedbackForm = JSON.parse(localStorage.getItem('feedback-form-state'));
+
+  if (feedbackForm) {
+    email.value = feedbackForm.email;
+    message.value = feedbackForm.message;
+  }
 }
