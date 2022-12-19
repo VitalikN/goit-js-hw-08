@@ -22,26 +22,10 @@ if (!localStorage.getItem('feedback-form-state')) {
 email.required = 'true';
 message.required = 'true';
 
-function onFormInput(evt) {
-  feedbackFormInitial[evt.target.name] = evt.target.value;
+function onFormInput() {
+  feedbackFormInitial.email = email.value;
+  feedbackFormInitial.message = message.value;
 
-  localStorage.setItem(
-    'feedback-form-state',
-    JSON.stringify(feedbackFormInitial)
-  );
-}
-function onFormSubmit(evt) {
-  evt.preventDefault();
-  if (!feedbackFormInitial.email || !feedbackFormInitial.message) {
-    return;
-  } else {
-    console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
-  }
-  evt.currentTarget.reset();
-  localStorage.removeItem('feedback-form-state');
-
-  feedbackFormInitial.email = '';
-  feedbackFormInitial.message = '';
   localStorage.setItem(
     'feedback-form-state',
     JSON.stringify(feedbackFormInitial)
@@ -55,4 +39,23 @@ function onInitform() {
     email.value = feedbackForm.email;
     message.value = feedbackForm.message;
   }
+}
+
+function onFormSubmit(evt) {
+  evt.preventDefault();
+  if (!feedbackFormInitial.email || !feedbackFormInitial.message) {
+    return;
+  } else {
+    console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+  }
+
+  // feedbackFormInitial.email = '';
+  // feedbackFormInitial.message = '';
+  localStorage.setItem(
+    'feedback-form-state',
+    JSON.stringify(feedbackFormInitial)
+  );
+
+  evt.currentTarget.reset();
+  localStorage.removeItem('feedback-form-state');
 }
